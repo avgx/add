@@ -340,7 +340,7 @@
       },
       {
         "id": "1a45a4d8-04ca-4124-80fa-60366f12ee58",
-        "title": "New Widget 1",
+        "title": "Demo of bottom static widget",
         "visualizeType": "Markdown",
         "groupBy": [],
         "filterItems": [],
@@ -349,6 +349,24 @@
         },
         "bottom": true,
         "description": "## something can be added to the bottom of dashboard\n\n### for example link some where\n\n[Next](#/dashboard/tutorial)"
+      },
+      {
+        "id": "2296b98f-6e99-48af-a573-1d511dd2c998",
+        "title": "Demo of events widget",
+        "visualizeType": "Events",
+        "groupBy": [],
+        "filterItems": [
+          {
+            "field": "event.detector.faceAppeared.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows event list"
       }
     ]
   }
