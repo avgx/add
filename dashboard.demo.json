@@ -1,0 +1,355 @@
+[
+  {
+    "id": "demo",
+    "title": "Demo for presentation",
+    "raw": [
+      {
+        "id": "1ae8e3c7-85df-4868-b90f-bd092482f9f0",
+        "title": "Demo of aggregation widget",
+        "visualizeType": "Table",
+        "groupBy": [
+          "event.detector.People.state"
+        ],
+        "filterItems": [
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows visitors by direction",
+        "table": {
+          "field": "event.detector.People.state",
+          "isAggregationFieldInGroupBy": true
+        }
+      },
+      {
+        "id": "2ae8e3c7-85df-4868-b90f-bd092482f9f0",
+        "title": "Demo of aggregation widget 2",
+        "visualizeType": "Table",
+        "groupBy": [
+          "source.server",
+          "event.detector.People.phase",
+          "event.detector.People.state"
+        ],
+        "filterItems": [
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows visitors by direction by server",
+        "table": {
+          "field": "event.detector.People.phase"
+        }
+      },
+      {
+        "id": "3ae8e3c7-85df-4868-b90f-bd092482f9f0",
+        "title": "Demo of pivot widget",
+        "visualizeType": "PivotTable",
+        "groupBy": [
+          "source.server",
+          "event.detector.People.phase",
+          "event.detector.People.state"
+        ],
+        "filterItems": [
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows pivot with delta column and highlight where in > 100",
+        "pivot": {
+          "rows": "source.server",
+          "columns": "event.detector.People.state",
+          "values": "event.detector.People.phase",
+          "op": "count",
+          "delta": true,
+          "deltaA": "in",
+          "deltaB": "out",
+          "referenceValue": 100,
+          "referenceOp": "gt",
+          "referenceColumn": "in"
+        }
+      },
+      {
+        "id": "4ae8e3c7-85df-4868-b90f-bd092482f9f0",
+        "title": "Demo of pivot widget 2",
+        "visualizeType": "PivotTable",
+        "groupBy": [
+          "source.server",
+          "event.detector.People.phase",
+          "event.detector.People.state"
+        ],
+        "filterItems": [
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows pivot widget with delta column",
+        "pivot": {
+          "rows": "source.server",
+          "columns": "event.detector.People.state",
+          "values": "event.detector.People.phase",
+          "op": "count",
+          "delta": true,
+          "deltaA": "in",
+          "deltaB": "out",
+          "referenceColumn": "*",
+          "deltaOnly": true
+        }
+      },
+      {
+        "id": "5ab0b802-fc58-461b-96af-6470e2449a48",
+        "title": "Demo of chart widget",
+        "visualizeType": "Chart",
+        "groupBy": [
+          "source.server",
+          "event.detector.People.state",
+          "type",
+          "time.hour"
+        ],
+        "filterItems": [
+          {
+            "field": "type",
+            "type": "set",
+            "op": "eq",
+            "value": "detector"
+          },
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows chart with x = hour / y = visitors count / serie = direction",
+        "chart": {
+          "type": "Line",
+          "x": "time.hour",
+          "y": "type",
+          "op": "count",
+          "series": "event.detector.People.state",
+          "brush": false
+        }
+      },
+      {
+        "id": "6ab0b802-fc58-461b-96af-6470e2449a48",
+        "title": "Demo of chart widget 2",
+        "visualizeType": "Chart",
+        "groupBy": [
+          "source.server",
+          "event.detector.People.state",
+          "type",
+          "time.min_of_day_x10"
+        ],
+        "filterItems": [
+          {
+            "field": "type",
+            "type": "set",
+            "op": "eq",
+            "value": "detector"
+          },
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows area chart with x = 10m / y = visitors count / serie = direction",
+        "chart": {
+          "type": "Area",
+          "x": "time.min_of_day_x10",
+          "y": "type",
+          "op": "count",
+          "series": "event.detector.People.state",
+          "brush": true
+        }
+      },
+      {
+        "id": "7ab0b802-fc58-461b-96af-6470e2449a48",
+        "title": "Demo of chart widget 3",
+        "visualizeType": "Chart",
+        "groupBy": [
+          "source.server",
+          "event.detector.People.state",
+          "type"
+        ],
+        "filterItems": [
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows bar chart with x = server / y = visitors count / serie = direction",
+        "chart": {
+          "type": "Bar",
+          "x": "source.server",
+          "y": "type",
+          "op": "count",
+          "series": "event.detector.People.state",
+          "brush": false
+        }
+      },
+      {
+        "id": "3b4af279-082e-4277-ab33-ede936b57c59",
+        "title": "Demo of pie widget",
+        "visualizeType": "Pie",
+        "groupBy": [
+          "source.server",
+          "event.detector.People.state",
+          "event.detector.People.phase"
+        ],
+        "filterItems": [
+          {
+            "field": "event.detector.People.phase",
+            "type": "set",
+            "op": "eq",
+            "value": "happened"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "chart": {
+          "x": "source.server",
+          "series": "event.detector.People.state",
+          "y": "event.detector.People.phase",
+          "op": "count"
+        },
+        "description": "sample shows pie with server x direction pie"
+      },
+      {
+        "id": "ad4d6ab1-c31f-4eb1-9051-eed291d679ab",
+        "title": "Demo of counter widget",
+        "visualizeType": "Counter",
+        "groupBy": [
+          "type"
+        ],
+        "filterItems": [
+          {
+            "field": "type",
+            "type": "set",
+            "op": "eq",
+            "value": "detector"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows total number of detector events",
+        "counter": {
+          "field": "type",
+          "op": "count"
+        }
+      },
+      {
+        "id": "bd4d6ab1-c31f-4eb1-9051-eed291d679ab",
+        "title": "Demo of counter widget 2",
+        "visualizeType": "Counter",
+        "groupBy": [
+          "type"
+        ],
+        "filterItems": [
+          {
+            "field": "type",
+            "type": "set",
+            "op": "eq",
+            "value": "detector"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows total number of detector events + 10000",
+        "counter": {
+          "field": "type",
+          "op": "count",
+          "offset": 10000
+        }
+      },
+      {
+        "id": "cd4d6ab1-c31f-4eb1-9051-eed291d679ab",
+        "title": "Demo of counter widget 3",
+        "visualizeType": "Counter",
+        "groupBy": [
+          "type"
+        ],
+        "filterItems": [
+          {
+            "field": "type",
+            "type": "set",
+            "op": "eq",
+            "value": "detector"
+          }
+        ],
+        "period": {
+          "type": "forever"
+        },
+        "description": "sample shows highlight feature when (counter + 10000) > 70000",
+        "counter": {
+          "field": "type",
+          "op": "count",
+          "offset": 10000,
+          "referenceValue": 70000,
+          "referenceOp": "gt"
+        }
+      },
+      {
+        "id": "ca789942-dda1-4b36-ac49-3a5203a9ca5f",
+        "title": "Demo of static content",
+        "visualizeType": "Markdown",
+        "groupBy": [],
+        "filterItems": [],
+        "period": {
+          "type": "forever"
+        },
+        "description": "![](https://www.axxonsoft.com/local/templates/axxonsoft-2019/img/logo.svg)\n\n# We can add some title\n\n## and subtitle\n\nAnd list\n\n* one\n* two\n\nAnd table\n\n| Item | Description | Price |\n| --- | --- | ---: |\n| item1 | *item1 description* | 1.00 |\n| item2 | *item2 description* | 100.00 |\n\nand link to external site, for example [axxonsoft](https://www.axxonsoft.com)\n\nand link to other dashboard, for example [tutorial](#/dashboard/tutorial)"
+      },
+      {
+        "id": "1a45a4d8-04ca-4124-80fa-60366f12ee58",
+        "title": "New Widget 1",
+        "visualizeType": "Markdown",
+        "groupBy": [],
+        "filterItems": [],
+        "period": {
+          "type": "forever"
+        },
+        "bottom": true,
+        "description": "## something can be added to the bottom of dashboard\n\n### for example link some where\n\n[Next](#/dashboard/tutorial)"
+      }
+    ]
+  }
+]
