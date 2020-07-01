@@ -1,7 +1,7 @@
 [
     {
         "id": "7DFA3E61-2410-4D7F-9FA9-286AEC176457",
-        "title": "Loaded dashboard sample",
+        "title": "Visitors",
         "raw": [
             {
               "id": "3B0CDEA8-8636-4457-8983-A8931DE80596",
@@ -33,6 +33,111 @@
               "description": "for all servers as bar chart"
             },
             {
+              "id": "268B9D0D-1BCD-4AEC-A3F3-A7AE6A752617",
+              "title": "Visitors by time",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.People.phase",
+                "event.detector.People.state",
+                "time.min_of_day_x30",
+                "time.hour_x2",
+                "time.min_of_day_x15"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.People.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                }
+              ],
+              "chart": {
+                "type": "Area",
+                "x": "time.min_of_day_x15",
+                "y": "event.detector.People.phase",
+                "op": "count",
+                "series": "event.detector.People.state"
+              },
+              "description": "in 15m intervals"
+            },
+            {
+              "id": "35FE34EA-F005-4CEB-B5B7-59A69D0AA077",
+              "title": "Visitors by time",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.People.phase",
+                "event.detector.People.state",
+                "time.min_of_day_x30",
+                "time.hour_x2",
+                "time.min_of_day_x15"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.People.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                }
+              ],
+              "chart": {
+                "type": "Area",
+                "x": "time.hour_x2",
+                "y": "event.detector.People.phase",
+                "op": "count",
+                "series": "event.detector.People.state"
+              },
+              "description": "in 2h intervals"
+            },
+            {
+              "id": "1BCE883B-ED71-4510-879B-C55A23C53E25",
+              "title": "Visitors by time Entered at server TIMUR",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.People.phase",
+                "event.detector.People.state",
+                "time.min_of_day_x30",
+                "time.hour_x2",
+                "time.min_of_day_x15"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.People.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                },
+                {
+                  "field": "source.server",
+                  "type": "dictionary",
+                  "op": "eq",
+                  "value": "TIMUR-SHUGUSHEV"
+                },
+                {
+                  "field": "event.detector.People.state",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "in"
+                }
+              ],
+              "chart": {
+                "type": "Line",
+                "x": "time.min_of_day_x30",
+                "y": "event.detector.People.phase",
+                "op": "count",
+                "series": "event.detector.People.state"
+              },
+              "description": "in 30m intervals"
+            },
+            {
               "id": "C4563579-6778-439D-9077-9909E986C503",
               "title": "Sample title",
               "visualizeType": "Markdown",
@@ -55,5 +160,504 @@
               "description": "### About layout\n\n* The grid layout for dashboard is fixed for 2 items per row.\n* Widgets are ordered by type.\n* Order: [ Markdown, Counter, Chart, Pie, Table] \n* This will be fixed in future"
             }
           ]
+      },
+      {
+        "id": "580AB752-4F07-4466-A7AD-3B631FA72E89",
+        "title": "Gender/Age",
+        "raw": [
+            {
+              "id": "F69B7338-B0B8-4563-B10C-C85FBBE6DE37",
+              "title": "Average age by server",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.faceAppeared.age",
+                "event.detector.faceAppeared.gender2",
+                "event.detector.faceAppeared.phase",
+                "time.hour_x2",
+                "source.server",
+                "source.video"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.faceAppeared.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                },
+                {
+                  "field": "event.detector.faceAppeared.age",
+                  "type": "number",
+                  "op": "gt",
+                  "value": "0"
+                }
+              ],
+              "chart": {
+                "type": "Bar",
+                "x": "event.detector.faceAppeared.gender2",
+                "y": "event.detector.faceAppeared.age",
+                "op": "avg",
+                "series": "source.server"
+              }
+            },
+            {
+              "id": "F1F30966-8A87-483C-8F1B-44202CE2A56D",
+              "title": "Male",
+              "visualizeType": "Counter",
+              "groupBy": [
+                "event.detector.faceAppeared.age",
+                "event.detector.faceAppeared.gender2",
+                "event.detector.faceAppeared.phase",
+                "time.hour_x2",
+                "source.server",
+                "source.video"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.faceAppeared.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                },
+                {
+                  "field": "event.detector.faceAppeared.gender2",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "male"
+                }
+              ],
+              "chart": {
+                "type": "Bar",
+                "x": "event.detector.faceAppeared.gender2",
+                "y": "event.detector.faceAppeared.age",
+                "op": "avg",
+                "series": "source.server"
+              },
+              "counter": {
+                "field": "event.detector.faceAppeared.phase",
+                "op": "count"
+              }
+            },
+            {
+              "id": "7FF86C62-430C-46AF-BB3D-EFC00061B812",
+              "title": "Female",
+              "visualizeType": "Counter",
+              "groupBy": [
+                "event.detector.faceAppeared.age",
+                "event.detector.faceAppeared.gender2",
+                "event.detector.faceAppeared.phase",
+                "time.hour_x2",
+                "source.server",
+                "source.video"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.faceAppeared.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                },
+                {
+                  "field": "event.detector.faceAppeared.gender2",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "female"
+                }
+              ],
+              "chart": {
+                "type": "Bar",
+                "x": "event.detector.faceAppeared.gender2",
+                "y": "event.detector.faceAppeared.age",
+                "op": "avg",
+                "series": "source.server"
+              },
+              "counter": {
+                "field": "event.detector.faceAppeared.phase",
+                "op": "count"
+              }
+            },
+            {
+              "id": "51DCD0D2-F304-45B7-8A72-C2CE6FF3625C",
+              "title": "Genders by server",
+              "visualizeType": "Pie",
+              "groupBy": [
+                "event.detector.faceAppeared.age",
+                "event.detector.faceAppeared.gender2",
+                "event.detector.faceAppeared.phase",
+                "time.hour_x2",
+                "source.server",
+                "source.video"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.faceAppeared.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                },
+                {
+                  "field": "event.detector.faceAppeared.age",
+                  "type": "number",
+                  "op": "gt",
+                  "value": "0"
+                },
+                {
+                  "field": "source.server",
+                  "type": "dictionary",
+                  "op": "neq",
+                  "value": "QA-T31"
+                }
+              ],
+              "chart": {
+                "type": "Bar",
+                "x": "event.detector.faceAppeared.gender2",
+                "y": "event.detector.faceAppeared.phase",
+                "op": "count",
+                "series": "source.server"
+              },
+              "counter": {
+                "field": "event.detector.faceAppeared.phase",
+                "op": "count"
+              },
+              "description": "excluding QA-T31"
+            },
+            {
+              "id": "E29DD14B-788A-4D3E-B75B-1BE430687303",
+              "title": "some other title",
+              "visualizeType": "Markdown",
+              "groupBy": [],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [],
+              "description": "### About layout\n\n* The grid layout for dashboard is fixed for 2 items per row.\n* Widgets are ordered by type.\n* Order: [ Markdown, Counter, Chart, Pie, Table] \n* This will be fixed in future"
+            },
+            {
+              "id": "929ED66E-BFFC-4133-AB42-9032A739EA01",
+              "title": "Sample title",
+              "visualizeType": "Markdown",
+              "groupBy": [],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [],
+              "description": "![](https://www.axxonsoft.com/local/templates/axxonsoft-2019/img/logo.svg)\n"
+            }
+          ]
+      },
+      {
+        "id": "42D77AE2-1E41-4D05-9924-DD65E7C53A1E",
+        "title": "Evasion detection",
+        "raw": [
+            {
+              "id": "EA82B93D-93F7-4CBC-BDD3-08A221B89DED",
+              "title": "Evasion detected",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.type",
+                "source.video",
+                "source.server",
+                "time.hour"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.type",
+                  "type": "dictionary",
+                  "op": "eq",
+                  "value": "EvasionDetected"
+                }
+              ],
+              "chart": {
+                "type": "Line",
+                "x": "time.hour",
+                "y": "event.detector.type",
+                "op": "count",
+                "series": "source.server"
+              },
+              "description": "by hour by all cameras of server"
+            },
+            {
+              "id": "4B5707C1-D502-4C9C-8FBB-FDEDB5096A6A",
+              "title": "Evasion detected",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.type",
+                "source.video",
+                "source.server",
+                "time.hour"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.type",
+                  "type": "dictionary",
+                  "op": "eq",
+                  "value": "EvasionDetected"
+                }
+              ],
+              "chart": {
+                "type": "Line",
+                "x": "time.hour",
+                "y": "event.detector.type",
+                "op": "count",
+                "series": "source.video"
+              },
+              "description": "by hour by cameras"
+            },
+            {
+              "id": "0D40CAC6-5A77-4B05-9FEE-6900F784EE64",
+              "title": "Evasion text",
+              "visualizeType": "Markdown",
+              "groupBy": [],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [],
+              "description": "![](https://www.axxonsoft.com/local/templates/axxonsoft-2019/img/logo.svg)\n\n# Evasion detection dashboard\n\n### demo\n"
+            },
+            {
+              "id": "1439ADA3-6FC0-4E71-A855-E91F7AE3F2F9",
+              "title": "description text",
+              "visualizeType": "Markdown",
+              "groupBy": [],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [],
+              "description": "# How it works\n\n* The data is taken from events with detectorType=EvasionDetected"
+            },
+            {
+              "id": "428EC59A-4DBE-4983-B676-8AD948142640",
+              "title": "Evasion by 15m intervals",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.type",
+                "source.video",
+                "source.server",
+                "time.min_of_day_x15"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.type",
+                  "type": "dictionary",
+                  "op": "eq",
+                  "value": "EvasionDetected"
+                }
+              ],
+              "chart": {
+                "type": "Area",
+                "x": "time.min_of_day_x15",
+                "y": "event.detector.type",
+                "op": "count",
+                "series": "source.server"
+              },
+              "description": "by 15m by all cameras of server"
+            },
+            {
+              "id": "A3C5649F-9E1C-4347-A9EF-A220318AE866",
+              "title": "Evasion by 15m intervals",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.type",
+                "source.video",
+                "source.server",
+                "time.min_of_day_x15"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.type",
+                  "type": "dictionary",
+                  "op": "eq",
+                  "value": "EvasionDetected"
+                }
+              ],
+              "chart": {
+                "type": "Area",
+                "x": "time.min_of_day_x15",
+                "y": "event.detector.type",
+                "op": "count",
+                "series": "source.video"
+              },
+              "description": "by 15m by cameras"
+            }
+          ]
+      },
+      {
+        "id": "A906943C-CC39-4C38-AAEF-82D4CF25625A",
+        "title": "LPR events (list)",
+        "raw": [
+            {
+              "id": "4b4e1346-2653-43cc-a647-6c5365286d57",
+              "title": "LPR events",
+              "visualizeType": "Events",
+              "groupBy": [],
+              "filterItems": [
+                {
+                  "field": "event.detector.type",
+                  "type": "dictionary",
+                  "op": "eq",
+                  "value": "plateRecognized"
+                }
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "description": "show lpr event with plate recognized"
+            }
+          ]
+      },
+      {
+        "id": "C9E18F8B-D2DE-42A0-BFF2-F4A542E69A3B",
+        "title": "Faces events (list)",
+        "raw": [
+            {
+              "id": "0854b7c4-f7b2-4473-81a1-23769b94118d",
+              "title": "Faces",
+              "visualizeType": "Events",
+              "groupBy": [],
+              "filterItems": [
+                {
+                  "field": "event.detector.faceAppeared.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                }
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "description": "all events with face appeared"
+            }
+        ]
+      },
+      {
+        "id": "5A01EE61-79A7-4C59-A6DC-E048EC432B80",
+        "title": "Pivot demo",
+        "raw": [
+            {
+              "id": "159483b2-ef82-48e3-9a3f-dd45e44ec6c2",
+              "title": "Weekdays distribution",
+              "visualizeType": "PivotTable",
+              "groupBy": [
+                "source.detector",
+                "event.detector.type",
+                "type",
+                "source.video",
+                "source.server",
+                "time.hour",
+                "time.min_of_day_x30",
+                "event.detector.faceAppeared.gender2",
+                "time.weekday"
+              ],
+              "filterItems": [
+                {
+                  "field": "type",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "detector"
+                },
+                {
+                  "field": "event.detector.faceAppeared.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                }
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "pivot": {
+                "rows": "event.detector.faceAppeared.gender2",
+                "columns": "time.weekday",
+                "values": "type",
+                "op": "count"
+              },
+              "description": "male / female by weekdays"
+            },
+              {
+                  "id": "159483b2-ef82-48e3-9a3f-dd45e44ec6c2",
+                  "title": "Detector to video pivot",
+                  "visualizeType": "PivotTable",
+                  "groupBy": [
+                    "source.detector",
+                    "event.detector.type",
+                    "type",
+                    "source.video",
+                    "source.server"
+                  ],
+                  "filterItems": [
+                    {
+                      "field": "type",
+                      "type": "set",
+                      "op": "eq",
+                      "value": "detector"
+                    }
+                  ],
+                  "period": {
+                    "type": "forever"
+                  },
+                  "pivot": {
+                    "rows": "source.detector",
+                    "columns": "source.video",
+                    "values": "type",
+                    "op": "count"
+                  },
+                  "description": "events count"
+              },
+              {
+                "id": "859483b2-ef82-48e3-9a3f-dd45e44ec6c2",
+                "title": "Pivot table sample",
+                "visualizeType": "PivotTable",
+                "groupBy": [
+                  "source.detector",
+                  "event.detector.type",
+                  "type",
+                  "source.video",
+                  "source.server",
+                  "time.hour",
+                  "time.min_of_day_x30"
+                ],
+                "filterItems": [
+                  {
+                    "field": "type",
+                    "type": "set",
+                    "op": "eq",
+                    "value": "detector"
+                  }
+                ],
+                "period": {
+                  "type": "forever"
+                },
+                "pivot": {
+                  "rows": "time.min_of_day_x30",
+                  "columns": "source.video",
+                  "values": "type",
+                  "op": "count"
+                }
+              }
+            ]
+            
       }
 ]

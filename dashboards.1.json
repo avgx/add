@@ -1,0 +1,59 @@
+[
+    {
+        "id": "7DFA3E61-2410-4D7F-9FA9-286AEC176457",
+        "title": "Loaded dashboard sample",
+        "raw": [
+            {
+              "id": "3B0CDEA8-8636-4457-8983-A8931DE80596",
+              "title": "Visitors by server",
+              "visualizeType": "Chart",
+              "groupBy": [
+                "event.detector.People.state",
+                "event.detector.People.phase",
+                "source.server"
+              ],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [
+                {
+                  "field": "event.detector.People.phase",
+                  "type": "set",
+                  "op": "eq",
+                  "value": "happened"
+                }
+              ],
+              "chart": {
+                "type": "Bar",
+                "x": "source.server",
+                "y": "event.detector.People.phase",
+                "op": "count",
+                "series": "event.detector.People.state"
+              },
+              "description": "for all servers as bar chart"
+            },
+            {
+              "id": "C4563579-6778-439D-9077-9909E986C503",
+              "title": "Sample title",
+              "visualizeType": "Markdown",
+              "groupBy": [],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [],
+              "description": "![](https://www.axxonsoft.com/local/templates/axxonsoft-2019/img/logo.svg)\n\n# This is Visitors dashboard\n\n#### here is some description\n\n[Markdown](http://daringfireball.net/projects/markdown/) lets you write content in a really natural way.\n\n  * You can have lists, like this one\n  * Make things **bold** or *italic*\n  * Embed snippets of `code`\n"
+            },
+            {
+              "id": "D8120B30-A644-4C30-B21E-1EEECAF60670",
+              "title": "some other title",
+              "visualizeType": "Markdown",
+              "groupBy": [],
+              "period": {
+                "type": "forever"
+              },
+              "filterItems": [],
+              "description": "### About layout\n\n* The grid layout for dashboard is fixed for 2 items per row.\n* Widgets are ordered by type.\n* Order: [ Markdown, Counter, Chart, Pie, Table] \n* This will be fixed in future"
+            }
+          ]
+      }
+]
